@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/index.css" crossorigin="anonymous">
+
+    <title>Outlet Remote</title>
+</head>
+
+<body>
+    {{$groups := .Groups}}
+    {{$addresses := .Addresses}}
+
+    <table id="buttonTable" class="table-sm table-dark">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                {{range $address := $addresses}}
+                <th class="text-center" scope="col">{{$address}}</th>
+                {{end}}
+            </tr>
+        </thead>
+        <tbody>
+            {{range $group := $groups}}
+            <tr>
+                <th class="align-middle" scope="row">{{$group}}</th>
+                {{range $address := $addresses}}
+                    <td>
+                        <div class="btn-group" role="group" group="{{$group}}" address="{{$address}}">
+                            <button type="button" class="btn btn-light" value="on">On</button>
+                            <button type="button" class="btn btn-dark" value="off">Off</button>
+                        </div>
+                    </td>
+                {{end}}
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/assets/js/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>
+    <script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(":button").each(function(idx, elem) {
+                $(elem).click(function(event) {
+                    parent = elem.parentElement;
+                    group = parent.getAttribute("group");
+                    address = parent.getAttribute("address");
+
+                    url = "/api/" + group + address;
+                    if (elem.getAttribute("value") == "on") {
+                        url += "+";
+                    } else {
+                        url += "-";
+                    }
+
+                    $.get(url);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
