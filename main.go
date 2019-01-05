@@ -57,7 +57,7 @@ const (
 	bit1PauseLen = bit0PulseLen
 )
 
-// Messages consiste of a group A-D, an address 1-3 and a state, on or off.
+// Messages consist of a group A-D, an address 1-3 and a state, on or off.
 type Message struct {
 	Group int
 	Addr  int
