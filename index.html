@@ -51,12 +51,16 @@
 
     <script>
         $(document).ready(function() {
+            // For each button rendered by the template.
             $(":button").each(function(idx, elem) {
+                // Add a click event.
                 $(elem).click(function(event) {
+                    // Get the parent's group and address.
                     parent = elem.parentElement;
                     group = parent.getAttribute("group");
                     address = parent.getAttribute("address");
 
+                    // Build an API url.
                     url = "/api/" + group + address;
                     if (elem.getAttribute("value") == "on") {
                         url += "+";
@@ -64,6 +68,7 @@
                         url += "-";
                     }
 
+                    // Call the url in the background.
                     $.get(url);
                 });
             });
