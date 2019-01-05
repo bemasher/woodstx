@@ -2,13 +2,13 @@ package main
 
 import (
 	"bytes"
+	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"regexp"
 	"strings"
 
-	"github.com/alecthomas/template"
 	"github.com/pkg/errors"
 )
 
